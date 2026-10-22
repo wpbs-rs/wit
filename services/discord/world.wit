@@ -1,0 +1,33 @@
+package wpbs-services:discord@0.1.0;
+
+/// Provides Discord events.
+@since(version = 0.1.0)
+world events {
+    @since(version = 0.1.0)
+    import subscriptions;
+    @since(version = 0.1.0)
+    export event-handler;
+}
+
+/// Provides Discord requests.
+@since(version = 0.1.0)
+world requests {
+    @since(version = 0.1.0)
+    import client;
+}
+
+/// Provides Discord interactions.
+@since(version = 0.1.0)
+world interactions {
+    @since(version = 0.1.0)
+    import registrations;
+    @since(version = 0.1.0)
+    export interaction-handler;
+}
+
+/// Provides Discord voice channels.
+@since(version = 0.1.0)
+world voice {
+    @since(version = 0.1.0)
+    import voice-channels;
+}

@@ -1,0 +1,17 @@
+package wpbs:core@0.1.0;
+
+/// Provides persistent storage, logging, and host and plugin lifecycle
+/// operations.
+@since(version = 0.1.0)
+world core {
+    @since(version = 0.1.0)
+    include wasi:keyvalue/imports@0.2.0-draft2;
+
+    @since(version = 0.1.0)
+    import logging;
+
+    @since(version = 0.1.0)
+    import lifecycle;
+    @since(version = 0.1.0)
+    export lifecycle-handler;
+}

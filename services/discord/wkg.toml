@@ -1,0 +1,2 @@
+[overrides]
+"wpbs:shared" = { path = "../../deps/wpbs-shared" }

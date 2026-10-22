@@ -1,0 +1,7 @@
+/// Provides Discord types shared by the other interfaces.
+@since(version = 0.1.0)
+interface types {
+    /// A Discord ID.
+    @since(version = 0.1.0)
+    type snowflake = u64;
+}

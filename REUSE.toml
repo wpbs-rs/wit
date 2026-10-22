@@ -1,0 +1,17 @@
+version = 1
+
+[[annotations]]
+path = ["**/*.wit", "**/wkg.toml"]
+SPDX-FileCopyrightText = "2026 Eduard Smet <contact@celarye.dev>"
+SPDX-License-Identifier = "Apache-2.0 OR MIT"
+
+# Source: https://github.com/WebAssembly/wasi-keyvalue
+[[annotations]]
+path = "deps/wasi-keyvalue/**"
+SPDX-FileCopyrightText = "2019-2023 the Contributors to the WASI Specification"
+SPDX-License-Identifier = "LicenseRef-W3C-CCLA"
+
+[[annotations]]
+path = [".github/**", ".gitignore", "README.md", "gen-deps.sh", "gen-deps.ps1"]
+SPDX-FileCopyrightText = "2026 Eduard Smet <contact@celarye.dev>"
+SPDX-License-Identifier = "CC0-1.0"

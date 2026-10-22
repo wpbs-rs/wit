@@ -1,0 +1,44 @@
+use wpbs:shared/shared-types@0.1.0;
+
+/// Provides host shutdown requests.
+@since(version = 0.1.0)
+interface lifecycle {
+    use shared-types.{host-error};
+
+    /// Requests graceful host shutdown or restart.
+    ///
+    /// Success means the request is accepted.
+    ///
+    /// Returns an error if the plugin does not have shutdown permission
+    /// (`permission-denied`).
+    @since(version = 0.1.0)
+    shutdown: func(action: shutdown-action) -> result<_, host-error>;
+
+    /// A host shutdown action.
+    @since(version = 0.1.0)
+    enum shutdown-action {
+        stop,
+        restart,
+    }
+}
+
+/// Provides plugin initialization and cleanup callbacks.
+@since(version = 0.1.0)
+interface lifecycle-handler {
+    use shared-types.{json, plugin-error};
+
+    /// Initializes the plugin with the provided settings.
+    ///
+    /// Called once during startup.
+    ///
+    /// Memory does not persist between callbacks. Store settings and other
+    /// state needed later in the key-value store.
+    @since(version = 0.1.0)
+    initialization: async func(settings: json) -> result<_, plugin-error>;
+
+    /// Performs final cleanup for the plugin.
+    ///
+    /// Called during graceful shutdown.
+    @since(version = 0.1.0)
+    shutdown: async func() -> result<_, plugin-error>;
+}

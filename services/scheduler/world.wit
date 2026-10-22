@@ -1,0 +1,19 @@
+package wpbs-services:scheduler@0.1.0;
+
+/// Provides crons scheduled through cron expressions.
+@since(version = 0.1.0)
+world cron {
+    @since(version = 0.1.0)
+    import crons;
+    @since(version = 0.1.0)
+    export cron-handler;
+}
+
+/// Provides one-shots that run once at a point in time.
+@since(version = 0.1.0)
+world one-shot {
+    @since(version = 0.1.0)
+    import one-shots;
+    @since(version = 0.1.0)
+    export one-shot-handler;
+}

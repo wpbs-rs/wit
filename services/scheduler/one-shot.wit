@@ -1,0 +1,72 @@
+use wpbs:shared/shared-types@0.1.0;
+
+/// Provides handles for one-shots that run once at a point in time.
+///
+/// Every operation that returns a `host-error` fails with `unavailable` if
+/// the scheduler service is disabled.
+@since(version = 0.1.0)
+interface one-shots {
+    use shared-types.{host-error};
+
+    /// A handle to a one-shot identified by a key.
+    ///
+    /// Handles with the same key refer to the same one-shot.
+    ///
+    /// Constructing a handle does not register the one-shot to a time. Dropping
+    /// a handle does not deregister the one-shot from its time. A registered
+    /// one-shot lasts until it is executed or wpbs stops.
+    ///
+    /// The scheduled execution invokes the exported `one-shot` callback with
+    /// this key. The one-shot is deregistered once it has been executed.
+    @since(version = 0.1.0)
+    resource one-shot {
+        /// Creates a handle to the one-shot identified by the provided key.
+        @since(version = 0.1.0)
+        constructor(key: string);
+
+        /// Registers a one-shot to a time.
+        ///
+        /// A time in the past executes the one-shot as soon as possible.
+        ///
+        /// A failed registration leaves any existing time unchanged.
+        ///
+        /// Returns an error if the one-shot is already registered to a time
+        /// (`already-exists`).
+        @since(version = 0.1.0)
+        register: async func(time: timestamp) -> result<_, host-error>;
+
+        /// Updates a one-shot to a new time.
+        ///
+        /// See the `register` method for more information on the time.
+        ///
+        /// A one-shot preserves its old time if this method fails.
+        ///
+        /// Returns an error if the one-shot is not registered to a time
+        /// (`not-found`).
+        @since(version = 0.1.0)
+        update: async func(time: timestamp) -> result<_, host-error>;
+
+        /// Deregisters a one-shot from its time.
+        ///
+        /// Returns an error if the one-shot is not registered to a time
+        /// (`not-found`).
+        @since(version = 0.1.0)
+        deregister: async func() -> result<_, host-error>;
+    }
+
+    /// A point in time in seconds since the Unix epoch.
+    @since(version = 0.1.0)
+    type timestamp = u64;
+}
+
+/// Provides the callback that executes one-shots.
+@since(version = 0.1.0)
+interface one-shot-handler {
+    use shared-types.{plugin-error};
+
+    /// Executes the one-shot identified by the provided key.
+    ///
+    /// Called when the one-shot's time is reached.
+    @since(version = 0.1.0)
+    one-shot: async func(key: string) -> result<_, plugin-error>;
+}

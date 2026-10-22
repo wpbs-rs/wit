@@ -1,0 +1,3 @@
+[overrides]
+"wpbs:shared" = { path = "../deps/wpbs-shared" }
+"wasi:keyvalue" = { path = "../deps/wasi-keyvalue" }

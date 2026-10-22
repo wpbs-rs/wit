@@ -1,0 +1,19 @@
+name: WIT Validation Check
+
+on: pull_request
+
+jobs:
+  wit-validation-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install wkg
+        run: |
+          curl -fsSLo wkg https://github.com/bytecodealliance/wasm-pkg-tools/releases/latest/download/wkg-x86_64-unknown-linux-gnu
+          chmod +x wkg
+          echo "$PWD" >> "$GITHUB_PATH"
+
+      - name: WIT Validation Check
+        run: ./gen-deps.sh
